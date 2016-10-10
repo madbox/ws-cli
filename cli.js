@@ -25,11 +25,6 @@ else {
         ws.send(app.args.join(' '), error);
     });
 
-    ws.on('close', function close() {
-        console.log('Disconnected');
-        process.exit(0);
-    });
-
     ws.on('message', (message) => {
         console.log('Received: %s', message);
         ws.close();
