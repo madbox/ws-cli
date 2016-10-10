@@ -13,12 +13,22 @@ if (!app.args.length || !app.host) app.help();
 else {
     let ws = new WebSocket(app.host);
     function error(err) {
-        console.log(err ? err : 'Successfully sent');
-        ws.close();
+        if (err) {
+            console.log(err);
+            process.exit(1);
+        }
+
+        console.log('Successfully sent');
     }
 
     ws.on('open', () => {
         ws.send(app.args.join(' '), error);
     });
+
+    ws.on('message', (message) => {
+        console.log('Received: %s', message);
+        ws.close();
+    });
+
     ws.on('error', error);
 }
