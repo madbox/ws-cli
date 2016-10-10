@@ -13,7 +13,7 @@ if (!app.args.length || !app.host) app.help();
 else {
     let ws = new WebSocket(app.host);
     function error(err) {
-        console.log(err ? err : 'Successfully sent!');
+        console.log(err ? err : 'Successfully sent');
         ws.close();
     }
 
